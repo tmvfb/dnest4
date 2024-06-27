@@ -91,7 +91,7 @@ class MyDistribution:
 if __name__ == "__main__":
     import random
 
-    dnest4 = random.Random()
+    # dnest4 = random.Random()
     distribution = MyDistribution()
 
     distribution.from_prior(None)
