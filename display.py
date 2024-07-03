@@ -38,7 +38,7 @@ E = E[which].flatten()
 
 pylab.hist(T / pylab.log(10.0), 500, alpha=0.2, color="k")
 pylab.xlabel(r"$\log_{10}$(Period/days)")
-pylab.xlim([1, 4])
+pylab.xlim([1, 5])
 # for i in range(1008, 1008 + int(truth[1007])):
 #     pylab.axvline(truth[i] / pylab.log(10.0), color="g")
 pylab.ylabel("Number of Posterior Samples")
@@ -65,7 +65,7 @@ pylab.subplot(2, 1, 2)
 #     markersize=7,
 #     alpha=0.5,
 # )
-pylab.xlim([1, 4])
+pylab.xlim([1, 5])
 pylab.xlabel(r"$\log_{10}$(Period/days)")
 pylab.ylabel("Eccentricity")
 pylab.plot(T / pylab.log(10.0), E, "g.", markersize=1)
