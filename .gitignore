@@ -4,4 +4,5 @@ Orbits/*.dat
 *.pyc
 **/__pycache__
 DNest4
+eigen
 .DS_Store

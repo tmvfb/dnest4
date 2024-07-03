@@ -15,7 +15,7 @@ void MyDistribution::from_prior(DNest4::RNG& rng)
 	// these all are Hyperparams defined in the paper
 
 	center = 5.901 + tan(M_PI*(0.97*rng.rand() - 0.485));  // median orbital period
-	width = 0.1 + 12.9*rng.rand();  // diversity of orbital periods
+	width = 0.1 + 2.9*rng.rand();  // diversity of orbital periods
 	mu = exp(tan(M_PI*(0.97*rng.rand() - 0.485)));  // mean amplitude (m/s), exp of Cauchy
 }
 
@@ -36,8 +36,8 @@ double MyDistribution::perturb_hyperparameters(DNest4::RNG& rng)
 	else if(which == 1)
 	{
 		// this updates width with rand gauss noise
-		width += 12.9*rng.randh();
-		DNest4::wrap(width, 0.1, 13.);
+		width += 2.9*rng.randh();
+		DNest4::wrap(width, 0.1, 3.);
 	}
 	else
 	{

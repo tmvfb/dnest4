@@ -7,7 +7,7 @@ pylab.rc("font", size=14, family="serif", serif="Computer Sans")
 pylab.rc("text")
 
 data = pylab.loadtxt("new_data.txt")
-# truth = pylab.loadtxt("fake_data_like_nuoph.truth")
+truth = pylab.loadtxt("fake_data_like_nuoph.truth")
 posterior_sample = pylab.atleast_2d(dn4.my_loadtxt("posterior_sample.txt"))
 
 width = 0.5
@@ -39,32 +39,32 @@ E = E[which].flatten()
 pylab.hist(T / pylab.log(10.0), 500, alpha=0.2, color="k")
 pylab.xlabel(r"$\log_{10}$(Period/days)")
 pylab.xlim([1, 5])
-# for i in range(1008, 1008 + int(truth[1007])):
-#     pylab.axvline(truth[i] / pylab.log(10.0), color="g")
+for i in range(1008, 1008 + int(truth[1007])):
+    pylab.axvline(truth[i] / pylab.log(10.0), color="g")
 pylab.ylabel("Number of Posterior Samples")
 pylab.show()
 
 pylab.subplot(2, 1, 1)
-# pylab.plot(
-#     truth[1008 : 1008 + int(truth[1007])] / pylab.log(10.0),
-#     pylab.log10(truth[1018 : 1018 + int(truth[1007])]),
-#     "ko",
-#     markersize=7,
-#     alpha=0.5,
-# )
+pylab.plot(
+    truth[1008 : 1008 + int(truth[1007])] / pylab.log(10.0),
+    pylab.log10(truth[1018 : 1018 + int(truth[1007])]),
+    "ko",
+    markersize=7,
+    alpha=0.5,
+)
 pylab.xlim([1, 4])
 pylab.ylim([-1, 3])
 pylab.ylabel(r"$\log_{10}$[Amplitude (m/s)$]$")
 pylab.plot(T / pylab.log(10.0), pylab.log10(A), "g.", markersize=1)
 
 pylab.subplot(2, 1, 2)
-# pylab.plot(
-#     truth[1008 : 1008 + int(truth[1007])] / pylab.log(10.0),
-#     truth[1038 : 1038 + int(truth[1007])],
-#     "ko",
-#     markersize=7,
-#     alpha=0.5,
-# )
+pylab.plot(
+    truth[1008 : 1008 + int(truth[1007])] / pylab.log(10.0),
+    truth[1038 : 1038 + int(truth[1007])],
+    "ko",
+    markersize=7,
+    alpha=0.5,
+)
 pylab.xlim([1, 5])
 pylab.xlabel(r"$\log_{10}$(Period/days)")
 pylab.ylabel("Eccentricity")
