@@ -39,6 +39,8 @@ void Orbit::load(const char* filename)
 
 vector<double> Orbit::evaluate(const std::vector<double>& arg_to_cos,
 						double viewing_angle) const
+// THIS STUFF RECALCULATES RADIAL VELOCITIES (FROM KEPLER ORBITS) accounting for arg_to_cos (phase?) and viewing_angle
+// it returns a corrective term by which we multiply the RV to account for the viewing angle
 {
 	// Create radial velocities
 	double C = cos(viewing_angle);

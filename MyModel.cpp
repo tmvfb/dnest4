@@ -7,8 +7,8 @@
 using namespace std;
 
 MyModel::MyModel()
-:objects(5, 10, false, MyDistribution())
-,mu(Data::get_instance().get_t().size())
+:objects(5, 10, false, MyDistribution())  // num_dim (5 params!), max_num_components (gaussians, dists, whatever, hard to get), whether_fix_max_num_comp, conditional_prior
+,mu(Data::get_instance().get_t().size())  // this is exactly RV signal that we want to compute. different from mu in MyDistribution
 {
 
 }
@@ -53,13 +53,19 @@ void MyModel::calculate_mu()
 		T = exp(components[j][0]);
 		A = components[j][1];
 		phi = components[j][2];
+		// we get initial speed from eccentricity. then find a matching orbit using lookup
+		// for this orbit we reevaluate RVs for the specified viewing angle
 		v0 = sqrt(1. - components[j][3]);
 		viewing_angle = components[j][4];
+
 		arg = t;
 		for(size_t i=0; i<arg.size(); i++)
+			// reevaluate phases for the specified timepoint
 			arg[i] = 2.*M_PI*t[i]/T + phi;
+		// evaluate RV corrective term (cos?) for the specified phase, eccentricity, viewing angle
 		evaluations = Lookup::get_instance().evaluate(arg, v0, viewing_angle);
 		for(size_t i=0; i<t.size(); i++)
+			// compute current RV for each datapoint
 			mu[i] += A*evaluations[i];
 	}
 }
@@ -104,6 +110,7 @@ double MyModel::perturb(DNest4::RNG& rng)
 }
 
 double MyModel::log_likelihood() const
+// does pretty much the same as log_pdf from MyDistribution?
 {
 	// Get the data
 	const vector<double>& y = Data::get_instance().get_y();
